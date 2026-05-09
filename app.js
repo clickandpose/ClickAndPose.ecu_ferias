@@ -238,7 +238,7 @@ const bg = new Image();
 // ===== FLOW =====
 startBtn.onclick=async()=>{
   if(!currentLayout) return alert("Selecciona un formato");
-  await countdown(10, currentIndex+1);
+  await countdown(3, currentIndex+1);
   photos[currentIndex]=capture();
 
   video.style.opacity=0;
