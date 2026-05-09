@@ -168,82 +168,73 @@ updateInput.onchange = (e) => {
     reader.readAsDataURL(file);  
   }  
 };  
-
-// ===== BUILD =====
-function build(callback) {
-
+  
+// ===== BUILD =====  
+function build(callback){  
+  
   function finish() {
-    drawPhotos(() => {
-      // Dibuja la marca de agua después de las fotos
-      const marca = new Image();
-      marca.onload = () => {
-        ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
-        canvas.style.display = "block";
-        canvas.style.opacity = 1;
-        if (callback) callback();
-      };
-      marca.src = "marca.png"; // tu archivo 4x6 con logos en esquinas
-    });
-  }
-
-// ===== BUILD =====
-function build(callback) {
-
-  function finish() {
-    drawPhotos(() => {
-      // Dibuja la marca de agua por encima de las fotos
-      const marca = new Image();
-      marca.onload = () => {
-        ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
-        canvas.style.display = "block";
-        canvas.style.opacity = 1;
-        if (callback) callback();
-      };
-      marca.src = "marca.png"; // tu archivo 4x6 con logos en esquinas
-    });
-  }
-
-  // ===== Fondo =====
-  if (backgroundOption === "season") {
-    const bg = new Image();
-    bg.onload = () => {
-      ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-      finish();
+  drawPhotos(() => {
+    // Dibuja la marca de agua encima de las fotos
+    const marca = new Image();
+    marca.onload = () => {
+      ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
+      canvas.style.display = "block";
+      canvas.style.opacity = 1;
+      if (callback) callback();
     };
-    bg.src = "temporada.jpg";
-  } else if (backgroundOption === "custom" && customBackground) {
-    const bg = new Image();
-    bg.onload = () => {
-      ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-      finish();
-    };
-    bg.src = customBackground;
-  } else {
-    // Colores normales
-    const colorMap = {
-      red: "#F44336",
-      orange: "#FF9800",
-      yellow: "#FFEB3B",
-      lightgreen: "#8BC34A",
-      green: "#4CAF50",
-      teal: "#009688",
-      cyan: "#00BCD4",
-      blue: "#2196F3",
-      indigo: "#3F51B5",
-      purple: "#9C27B0",
-      deepPurple: "#673AB7",
-      pink: "#E91E63",
-      brown: "#795548",
-      beige: "#ebcaa8",
-      white: "#ffffff",
-      black: "#000000",
-    };
-    ctx.fillStyle = colorMap[backgroundOption] || "#f5f5dc";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    finish();
-  }
+    marca.src = "marca.png"; // tu archivo 4x6 con logos en esquinas
+  });
 }
-
+  
+  if(backgroundOption==="red"){ ctx.fillStyle="#F44336";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+  else if(backgroundOption==="orange"){ ctx.fillStyle="#FF9800";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+  else if(backgroundOption==="yellow"){ ctx.fillStyle="#FFEB3B";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+  else if(backgroundOption==="lightgreen"){ ctx.fillStyle="#8BC34A";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="green"){ ctx.fillStyle="#4CAF50";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="teal"){ ctx.fillStyle="#009688";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="cyan"){ ctx.fillStyle="#00BCD4";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="blue"){ ctx.fillStyle="#2196F3";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="indigo"){ ctx.fillStyle="#3F51B5";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="purple"){ ctx.fillStyle="#9C27B0";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="deepPurple"){ ctx.fillStyle="#673AB7";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="pink"){ ctx.fillStyle="#E91E63";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="brown"){ ctx.fillStyle="#795548";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="beige"){ ctx.fillStyle="#ebcaa8";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="white"){ ctx.fillStyle="#ffffff";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="black"){ ctx.fillStyle="#000000";  
+ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
+else if(backgroundOption==="season"){  
+const bg = new Image();  
+bg.onload=()=>{ ctx.drawImage(bg,0,0,canvas.width,canvas.height); finish(); };  
+bg.src="temporada.jpg";  
+}  
+else if(backgroundOption==="custom" && customBackground){  
+const bg = new Image();  
+    bg.onload=()=>{ ctx.drawImage(bg,0,0,canvas.width,canvas.height); finish(); };  
+    bg.src = customBackground;  
+  }  
+  else{  
+    ctx.fillStyle="#f5f5dc"; // fallback beige  
+    ctx.fillRect(0,0,canvas.width,canvas.height);  
+    finish();  
+  }  
+}  
+  
 // ===== FLOW =====
 startBtn.onclick=async()=>{
   if(!currentLayout) return alert("Selecciona un formato");
