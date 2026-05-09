@@ -169,75 +169,62 @@ updateInput.onchange = (e) => {
   }  
 };  
 
-// ===== BUILD =====  
-function build(callback){  
+// ===== BUILD =====
+function build(callback) {
 
-  function finish(){  
-    drawPhotos(()=>{  
-      canvas.style.display="block";  
-      canvas.style.opacity=1;  
-      if(callback) callback();  
-    });  
-  }  
-
-  if(backgroundOption==="red"){  
-    ctx.fillStyle="#F44336";  
-    ctx.fillRect(0,0,canvas.width,canvas.height);  
-    // Marca de agua
-    const marca = new Image();
-    marca.onload = () => {
-      ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
-      finish();
-    };
-    marca.src = "marca.png";
-  }  
-  else if(backgroundOption==="orange"){  
-    ctx.fillStyle="#FF9800";  
-    ctx.fillRect(0,0,canvas.width,canvas.height);  
-    const marca = new Image();
-    marca.onload = () => {
-      ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
-      finish();
-    };
-    marca.src = "marca.png";
-  }  
-  // ... repites el mismo bloque para cada color/fondo ...
-  else if(backgroundOption==="season"){  
-    const bg = new Image();  
-    bg.onload=()=>{  
-      ctx.drawImage(bg,0,0,canvas.width,canvas.height);  
+  function finish() {
+    drawPhotos(() => {
+      // Dibuja la marca de agua después de las fotos
       const marca = new Image();
       marca.onload = () => {
         ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
-        finish();
+        canvas.style.display = "block";
+        canvas.style.opacity = 1;
+        if (callback) callback();
       };
-      marca.src = "marca.png";
-    };  
-    bg.src="temporada.jpg";  
-  }  
-  else if(backgroundOption==="custom" && customBackground){  
-    const bg = new Image();  
-    bg.onload=()=>{  
-      ctx.drawImage(bg,0,0,canvas.width,canvas.height);  
-      const marca = new Image();
-      marca.onload = () => {
-        ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
-        finish();
-      };
-      marca.src = "marca.png";
-    };  
-    bg.src = customBackground;  
-  }  
-  else{  
-    ctx.fillStyle="#f5f5dc"; // fallback beige  
-    ctx.fillRect(0,0,canvas.width,canvas.height);  
-    const marca = new Image();
-    marca.onload = () => {
-      ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
+      marca.src = "marca.png"; // tu archivo 4x6 con logos en esquinas
+    });
+  }
+
+  // ===== Fondo =====
+  if (backgroundOption === "season") {
+    const bg = new Image();
+    bg.onload = () => {
+      ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
       finish();
     };
-    marca.src = "marca.png";
-  }  
+    bg.src = "temporada.jpg";
+  } else if (backgroundOption === "custom" && customBackground) {
+    const bg = new Image();
+    bg.onload = () => {
+      ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+      finish();
+    };
+    bg.src = customBackground;
+  } else {
+    // Colores normales
+    const colorMap = {
+      red: "#F44336",
+      orange: "#FF9800",
+      yellow: "#FFEB3B",
+      lightgreen: "#8BC34A",
+      green: "#4CAF50",
+      teal: "#009688",
+      cyan: "#00BCD4",
+      blue: "#2196F3",
+      indigo: "#3F51B5",
+      purple: "#9C27B0",
+      deepPurple: "#673AB7",
+      pink: "#E91E63",
+      brown: "#795548",
+      beige: "#ebcaa8",
+      white: "#ffffff",
+      black: "#000000",
+    };
+    ctx.fillStyle = colorMap[backgroundOption] || "#f5f5dc";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    finish();
+  }
 }
 
 // ===== FLOW =====
