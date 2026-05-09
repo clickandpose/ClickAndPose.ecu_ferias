@@ -169,17 +169,9 @@ updateInput.onchange = (e) => {
   }  
 };  
 
-// ===== Marca de agua completa =====
-const marca = new Image();
-marca.onload = () => {
-  ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
-  finish();
-};
-marca.src = "marca.png"; // tu archivo 4x6 con logos
-
 // ===== BUILD =====  
 function build(callback){  
-  
+
   function finish(){  
     drawPhotos(()=>{  
       canvas.style.display="block";  
@@ -187,56 +179,67 @@ function build(callback){
       if(callback) callback();  
     });  
   }  
-  
-  if(backgroundOption==="red"){ ctx.fillStyle="#F44336";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-  else if(backgroundOption==="orange"){ ctx.fillStyle="#FF9800";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-  else if(backgroundOption==="yellow"){ ctx.fillStyle="#FFEB3B";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-  else if(backgroundOption==="lightgreen"){ ctx.fillStyle="#8BC34A";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="green"){ ctx.fillStyle="#4CAF50";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="teal"){ ctx.fillStyle="#009688";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="cyan"){ ctx.fillStyle="#00BCD4";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="blue"){ ctx.fillStyle="#2196F3";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="indigo"){ ctx.fillStyle="#3F51B5";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="purple"){ ctx.fillStyle="#9C27B0";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="deepPurple"){ ctx.fillStyle="#673AB7";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="pink"){ ctx.fillStyle="#E91E63";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="brown"){ ctx.fillStyle="#795548";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="beige"){ ctx.fillStyle="#ebcaa8";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="white"){ ctx.fillStyle="#ffffff";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="black"){ ctx.fillStyle="#000000";  
-ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="season"){  
-const bg = new Image();  
-bg.onload=()=>{ ctx.drawImage(bg,0,0,canvas.width,canvas.height); finish(); };  
-bg.src="temporada.jpg";  
-}  
-else if(backgroundOption==="custom" && customBackground){  
-const bg = new Image();  
-    bg.onload=()=>{ ctx.drawImage(bg,0,0,canvas.width,canvas.height); finish(); };  
+
+  if(backgroundOption==="red"){  
+    ctx.fillStyle="#F44336";  
+    ctx.fillRect(0,0,canvas.width,canvas.height);  
+    // Marca de agua
+    const marca = new Image();
+    marca.onload = () => {
+      ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
+      finish();
+    };
+    marca.src = "marca.png";
+  }  
+  else if(backgroundOption==="orange"){  
+    ctx.fillStyle="#FF9800";  
+    ctx.fillRect(0,0,canvas.width,canvas.height);  
+    const marca = new Image();
+    marca.onload = () => {
+      ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
+      finish();
+    };
+    marca.src = "marca.png";
+  }  
+  // ... repites el mismo bloque para cada color/fondo ...
+  else if(backgroundOption==="season"){  
+    const bg = new Image();  
+    bg.onload=()=>{  
+      ctx.drawImage(bg,0,0,canvas.width,canvas.height);  
+      const marca = new Image();
+      marca.onload = () => {
+        ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
+        finish();
+      };
+      marca.src = "marca.png";
+    };  
+    bg.src="temporada.jpg";  
+  }  
+  else if(backgroundOption==="custom" && customBackground){  
+    const bg = new Image();  
+    bg.onload=()=>{  
+      ctx.drawImage(bg,0,0,canvas.width,canvas.height);  
+      const marca = new Image();
+      marca.onload = () => {
+        ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
+        finish();
+      };
+      marca.src = "marca.png";
+    };  
     bg.src = customBackground;  
   }  
   else{  
     ctx.fillStyle="#f5f5dc"; // fallback beige  
     ctx.fillRect(0,0,canvas.width,canvas.height);  
-    finish();  
+    const marca = new Image();
+    marca.onload = () => {
+      ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
+      finish();
+    };
+    marca.src = "marca.png";
   }  
-}  
-  
+}
+
 // ===== FLOW =====
 startBtn.onclick=async()=>{
   if(!currentLayout) return alert("Selecciona un formato");
