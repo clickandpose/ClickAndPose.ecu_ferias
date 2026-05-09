@@ -236,18 +236,16 @@ const bg = new Image();
 }  
   
 // ===== FLOW =====
-startBtn.onclick=async()=>{
-  if(!currentLayout) return alert("Selecciona un formato");
-  await countdown(3, currentIndex+1);
-  photos[currentIndex]=capture();
-
-  video.style.opacity=0;
-  canvas.style.display="block";
-  canvas.style.opacity=1;
+startBtn.onclick = async () => {
+  if (!currentLayout) return alert("Selecciona un formato");
+  await countdown(3, currentIndex + 1); // ← ahora en 3 segundos
+  photos[currentIndex] = capture();
+  video.style.opacity = 0;
+  canvas.style.display = "block";
+  canvas.style.opacity = 1;
   build();
-
-  repeatBtn.disabled=false;
-  nextBtn.disabled=false;
+  repeatBtn.disabled = false;
+  nextBtn.disabled = false;
 };
 
 repeatBtn.onclick=()=>{
