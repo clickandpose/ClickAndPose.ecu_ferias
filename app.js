@@ -168,7 +168,15 @@ updateInput.onchange = (e) => {
     reader.readAsDataURL(file);  
   }  
 };  
-  
+
+// ===== Marca de agua completa =====
+const marca = new Image();
+marca.onload = () => {
+  ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
+  finish();
+};
+marca.src = "marca.png"; // tu archivo 4x6 con logos
+
 // ===== BUILD =====  
 function build(callback){  
   
