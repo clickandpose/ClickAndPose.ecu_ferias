@@ -186,6 +186,23 @@ function build(callback) {
     });
   }
 
+// ===== BUILD =====
+function build(callback) {
+
+  function finish() {
+    drawPhotos(() => {
+      // Dibuja la marca de agua por encima de las fotos
+      const marca = new Image();
+      marca.onload = () => {
+        ctx.drawImage(marca, 0, 0, canvas.width, canvas.height);
+        canvas.style.display = "block";
+        canvas.style.opacity = 1;
+        if (callback) callback();
+      };
+      marca.src = "marca.png"; // tu archivo 4x6 con logos en esquinas
+    });
+  }
+
   // ===== Fondo =====
   if (backgroundOption === "season") {
     const bg = new Image();
