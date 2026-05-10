@@ -208,7 +208,7 @@ else if(backgroundOption==="purple"){ ctx.fillStyle="#9C27B0";
 ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
 else if(backgroundOption==="deepPurple"){ ctx.fillStyle="#673AB7";  
 ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
-else if(backgroundOption==="pink"){ ctx.fillStyle="#E91E63";  
+else if(backgroundOption==="pink"){ ctx.fillStyle="#f885ac";  
 ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
 else if(backgroundOption==="brown"){ ctx.fillStyle="#795548";  
 ctx.fillRect(0,0,canvas.width,canvas.height); finish(); }  
